@@ -2,47 +2,26 @@
 
 The Microsoft Cloud Adoption Framework for Azure is proven guidance that's designed to help you create and implement the business and technology strategies necessary for your organization to succeed in the cloud. It provides best practices, documentation, and tools that cloud architects, IT professionals, and business decision makers need to successfully achieve short-term and long-term objectives.
 
-By using the Microsoft Cloud Adoption Framework for Azure best practices, organizations can better align their business and technical strategies to ensure success.
+The Cloud Adoption Framework brings together cloud adoption best practices from Microsoft employees, partners, and customers. It provides a set of tools, guidance, and narratives that help shape technology, business, and people strategies for driving desired business outcomes during your cloud adoption effort.By using the Microsoft Cloud Adoption Framework for Azure best practices, organizations can better align their business and technical strategies to ensure success.
 
 ## Lab Context 	
-Tailwind Traders is planning to migrate initial set of workloads from on-premises to cloud. They need a reference architecture to deploy and enforce resources, policies, and templates that will allow them to confidently get started with Azure. 	
 
-## Pre-requisites: 	
-Empty Azure Subscriptions with root level owner access  	
+In this workshop using the cloud adoption framework concepts you will learn how to create a landing zone to host the workloads that you plan to build in or migrate to the cloud by deploying resources,assigning policies using different blueprint samples CAF Migration landing zone and CAF foundation zone and see how to establish a governance MVP. You will also be deploying Enterprise scale architecture where in you can scale according to business requirement.
 
 ## Exercise 1: Start Small and Expand Migrate Landing Zone 	
 
 In this exercise, you will create a blueprint definition based on CAF Migration Landing Zone, explore the capabilities it provides and assign it at the subscription level to get start started with Azure. Also, you will update the blueprint to match DMS Network architecture of Tailwind Traders. 	
 
-
 ## Exercise 2: Governance  	
 
-Migrations have gone well. However, there are no strict governance established across the organization.  	
+In this exercise you will create a blueprint definition based on CAF Foundation zone, also learn about best practices for governance that is resource consistency,security baseline and how to manage the cost to ensure no deployments have been made that bypass the rules.
 
-Tailwind Traders need to establish recommended best practices for governance and a way to audit that no deployments have been made that bypass those rules. This audit needs to scale across the entire organization. 	
-
-Enable Resource Consistency 	
-
-Enable Security Baseline 	
-
-Enable Cost Management 	
-
-## Exercise 3: Enterprise Scale 	
-
- The Enterprise-Scale architecture is modular by design and allow organizations to start with foundational landing zones that support their application portfolios, regardless of whether the applications are being migrated or are newly developed and deployed to Azure. The architecture enables organizations to start as small as needed and scale alongside their business requirements regardless of scale point. 	
-
-The Wing Tip company want to start with Landing Zones for their workload in Azure, where hybrid connectivity to their on-premise datacenter is not required from the start.  	
+## Exercise 3: Enterprise Scale  	
 
 In this exercise you will deploy the Management Group structure using ARM template and Policy Set definitions and also deploy the resources in the Enterprise scale landing zone	
 
 ## Exercise 4: Azure Server Management Services 	
 
-In this exercise you will enable server management services like Onboard Update Management, Change Tracking, and Inventory solutions to Azure virtual machine 	
+In this exercise you will see how to enable server management services like Update Management, Change Tracking, and Inventory solutions to Azure virtual machine, how to schedule updates on a virtual machine,how to track files using Change Tracking and assign guest configuration policies.
 
-- Create and update schedules 	
 
-- Use the Azure Policy Guest Configuration extension to audit the configuration settings in a virtual machine to verify that password security settings in Windows and Linux computers are set correctly 	
-
-- Enable Tracking and Alerting for Critical Changes 	
-
-- Set Alerts on file or registry changes in the VM 
