@@ -6,7 +6,7 @@ The Cloud Adoption Framework brings together cloud adoption best practices from 
 
 ## Lab Context 	
 
-In this workshop using the cloud adoption framework concepts you will learn how to create a landing zone to host the workloads that you plan to build in or migrate to the cloud by deploying resources,assigning policies using different blueprint samples CAF Migration landing zone and CAF foundation zone and see how to establish a governance MVP. You will also be deploying Enterprise scale architecture where in you can scale according to business requirement.
+In this workshop using the cloud adoption framework concepts you will learn how to create a landing zone to host the workloads that you plan to build in or migrate to the cloud by deploying resources,assigning policies using different blueprint samples CAF Migration landing zone and CAF foundation zone and see how to establish a governance MVP. You will also be deploying Enterprise scale architecture.
 
 ## Exercise 1: Start Small and Expand Migrate Landing Zone 	
 
