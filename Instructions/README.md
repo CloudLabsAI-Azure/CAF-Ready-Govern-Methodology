@@ -12,7 +12,7 @@ In this workshop, you will learn how to deploy different landing zones to host t
 
 In this exercise, you will create a blueprint definition based on CAF Migration Landing Zone, explore the capabilities it provides and assign it at the subscription level to get started with Azure. Also, you will update the blueprint to match the DMZ Network architecture of Tailwind Traders. 	
 
-## Exercise 2: Governance  	
+## Exercise 2: Governance MVP	
 
 In this exercise, you will create a blueprint definition based on the CAF Foundation zone, also learn about best practices for governance that is resource consistency, security baseline, and how to manage the cost to ensure no deployments have been made that bypass the rules.
 
