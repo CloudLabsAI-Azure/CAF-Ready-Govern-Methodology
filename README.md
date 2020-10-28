@@ -1,2 +1,1 @@
-# Cloud Adoption Framework in a day
-
+# AIW-Cloud-Adoption-Framework
