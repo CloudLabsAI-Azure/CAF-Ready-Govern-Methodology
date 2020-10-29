@@ -20,7 +20,7 @@ In this exercise, you will create a blueprint definition based on the CAF Founda
 
 In this exercise, you will deploy the Management Group structure using the ARM template and Policy Set definitions and also deploy the resources in the Enterprise scale landing zone.	
 
-## Exercise 4: Azure Server Management Services 	
+## Exercise 4: Operations Management 	
 
 In this exercise, you will see how to enable server management services like Update Management, Change Tracking, and Inventory solutions to Azure virtual machine, how to schedule updates on a virtual machine, how to track files using Change Tracking, and assign guest configuration policies.
 
