@@ -27,7 +27,7 @@
         "vNET_Subnet_DATA_Name": "Data",
         "vNET_Subnet_DATA_CIDR": "[concat(parameters('IPAddress_Space'),'.3.0/24')]",
         "vNET_Subnet_DATA_NSG": "[concat(parameters('Organization_Name'), '-Data-NSG')]",
-        "vNET_Subnet_BASTION_Name": "Bastion",
+        "vNET_Subnet_BASTION_Name": "AzureBastionSubnet",
         "vNET_Subnet_BASTION_CIDR": "[concat(parameters('IPAddress_Space'),'.254.0/27')]",
         "vNET_Subnet_BASTION_NSG": "[concat(parameters('Organization_Name'), '-Bastion-NSG')]"
       }
