@@ -3,10 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "Organization_Name": {
-      "type": "string"
+      "type": "String"
     },
     "IPAddress_Space": {
-      "type": "string"
+      "type": "String"
     }
   },
   "variables": {
@@ -27,22 +27,24 @@
         "vNET_Subnet_DATA_Name": "Data",
         "vNET_Subnet_DATA_CIDR": "[concat(parameters('IPAddress_Space'),'.3.0/24')]",
         "vNET_Subnet_DATA_NSG": "[concat(parameters('Organization_Name'), '-Data-NSG')]",
-        "vNET_Subnet_BASTION_Name": "AzureBastionSubnet",
-        "vNET_Subnet_BASTION_CIDR": "[concat(parameters('IPAddress_Space'),'.254.0/27')]",
-        "vNET_Subnet_BASTION_NSG": "[concat(parameters('Organization_Name'), '-Bastion-NSG')]"
+        "vNET_Subnet_AZUREBASTIONSUBNET_Name": "AzureBastionSubnet",
+        "vNET_Subnet_AZUREBASTIONSUBNET_CIDR": "[concat(parameters('IPAddress_Space'),'.254.0/27')]",
+        "vNET_Subnet_AZUREBASTIONSUBNET_NSG": "[concat(parameters('Organization_Name'), '-Bastion-NSG')]"
       }
     ]
   },
   "resources": [
     {
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('vNET_Info')[copyIndex()].vNET_Name]",
       "apiVersion": "2017-08-01",
+      "name": "[variables('vNET_Info')[copyIndex()].vNET_Name]",
       "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "vNET_Copy",
-        "count": "[length(variables('vNET_Info'))]"
-      },
+      "dependsOn": [
+        "Web-NSG-Copy",
+        "Business-NSG-Copy",
+        "Data-NSG-Copy",
+        "Bastion-NSG-Copy"
+      ],
       "tags": {
         "displayName": "Virtual Network"
       },
@@ -84,11 +86,11 @@
             }
           },
           {
-            "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_BASTION_Name]",
+            "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_AZUREBASTIONSUBNET_Name]",
             "properties": {
-              "addressPrefix": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_BASTION_CIDR]",
+              "addressPrefix": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_AZUREBASTIONSUBNET_CIDR]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('vNET_Info')[copyIndex()].vNET_Subnet_BASTION_NSG)]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('vNET_Info')[copyIndex()].vNET_Subnet_AZUREBASTIONSUBNET_NSG)]"
               }
             }
           },
@@ -103,95 +105,164 @@
           }
         ]
       },
-      "dependsOn": [
-        "Web-NSG-Copy",
-        "Business-NSG-Copy",
-        "Data-NSG-Copy",
-        "Bastion-NSG-Copy"
-      ]
+      "copy": {
+        "name": "vNET_Copy",
+        "count": "[length(variables('vNET_Info'))]"
+      }
     },
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-04-01",
       "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_WEB_NSG]",
       "location": "[resourcegroup().location]",
+      "dependsOn": [],
       "tags": {
         "displayName": "Web NSG"
-      },
-      "copy": {
-        "name": "Web-NSG-Copy",
-        "count": "[length(variables('vNET_Info'))]"
       },
       "properties": {
         "securityRules": []
       },
-      "dependsOn": []
+      "copy": {
+        "name": "Web-NSG-Copy",
+        "count": "[length(variables('vNET_Info'))]"
+      }
     },
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-04-01",
       "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_BUSINESS_NSG]",
       "location": "[resourcegroup().location]",
+      "dependsOn": [],
       "tags": {
         "displayName": "Business NSG"
-      },
-      "copy": {
-        "name": "Business-NSG-Copy",
-        "count": "[length(variables('vNET_Info'))]"
       },
       "properties": {
         "securityRules": []
       },
-      "dependsOn": []
+      "copy": {
+        "name": "Business-NSG-Copy",
+        "count": "[length(variables('vNET_Info'))]"
+      }
     },
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-04-01",
       "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_DATA_NSG]",
       "location": "[resourcegroup().location]",
+      "dependsOn": [],
       "tags": {
         "displayName": "Data NSG"
+      },
+      "properties": {
+        "securityRules": []
       },
       "copy": {
         "name": "Data-NSG-Copy",
         "count": "[length(variables('vNET_Info'))]"
-      },
-      "properties": {
-        "securityRules": []
-      },
-      "dependsOn": []
+      }
     },
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-04-01",
-      "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_BASTION_NSG]",
+      "name": "[variables('vNET_Info')[copyIndex()].vNET_Subnet_AZUREBASTIONSUBNET_NSG]",
       "location": "[resourcegroup().location]",
+      "dependsOn": [],
       "tags": {
         "displayName": "Bastion NSG"
+      },
+      "properties": {
+        "securityRules": [
+          {
+            "name": "bastion-in-allow",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "Internet",
+              "destinationPortRange": "443",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "bastion-control-in-allow",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "GatewayManager",
+              "destinationPortRanges": [
+                "443",
+                "4443"
+              ],
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 120,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "bastion-in-deny",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 900,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "bastion-vnet-out-allow",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationPortRanges": [
+                "22",
+                "3389"
+              ],
+              "destinationAddressPrefix": "VirtualNetwork",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Outbound"
+            }
+          },
+          {
+            "name": "bastion-azure-out-allow",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationPortRange": "443",
+              "destinationAddressPrefix": "AzureCloud",
+              "access": "Allow",
+              "priority": 120,
+              "direction": "Outbound"
+            }
+          }
+        ]
       },
       "copy": {
         "name": "Bastion-NSG-Copy",
         "count": "[length(variables('vNET_Info'))]"
-      },
-      "properties": {
-        "securityRules": []
-      },
-      "dependsOn": []
+      }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/providers/locks",
       "apiVersion": "2016-09-01",
       "name": "[concat(variables('vNET_Info')[copyIndex()].vNET_Name, '/Microsoft.Authorization/AzureVNet-DoNotDelete')]",
-      "copy": {
-        "name": "vNETLock_Copy",
-        "count": "[length(variables('vNET_Info'))]"
-      },
       "dependsOn": [
         "vNET_Copy"
       ],
-      "comments": "Resource lock on Azure vNET",
       "properties": {
         "level": "CannotDelete"
+      },
+      "copy": {
+        "name": "vNETLock_Copy",
+        "count": "[length(variables('vNET_Info'))]"
       }
     }
   ],
