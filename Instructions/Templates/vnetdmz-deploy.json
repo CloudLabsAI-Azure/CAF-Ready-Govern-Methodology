@@ -202,19 +202,6 @@
             }
           },
           {
-            "name": "bastion-in-deny",
-            "properties": {
-              "protocol": "*",
-              "sourcePortRange": "*",
-              "destinationPortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Deny",
-              "priority": 900,
-              "direction": "Inbound"
-            }
-          },
-          {
             "name": "bastion-vnet-out-allow",
             "properties": {
               "protocol": "Tcp",
