@@ -20,14 +20,14 @@ These on-ramps represent where organizations are today in their cloud adoption p
 | **Align** | For organizations who have an existing environment that needs modification to align to the Azure landing zone target architecture and best practices (also referred to as *brownfield*). <br> Use the transition from brownfield guidance in order to understand the decision points and technical approach to refactoring environments to align with the guidance in the Ready methodology | [Refactor a landing zone](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/refactor) |
 | **Enhance** | For environments that are already in line with best practices but the organization is looking to add additional controls or features. <br> Explore the articles that explain the considerations as part of enhancing the key ongoing processes for cloud environments, such as management, governance and security. | [Enhance guidance for management](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-operations) <br> [Enhance guidance for governance](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-governance) <br> [Enhance guidance for security](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-security) |
 
-## Exercise 1: Start
+## Exercise 1: Deploying enterprise-scale
 
 In this exercise, Start with the Azure landing zone conceptual architecture to understand the recommended end state. Next, explore each landing zone design areas to understand the key themes that comprise the considerations and decisions needed and deploy the ready-made deployment experience available which we call the Azure landing zone accelerator.
 
-## Exercise 2: Align
+## Exercise 2: Start small and expand a migration landing zone
 
 For this scenario, you have minimal requirements and will iterate into the conceptual architecture over time. In this exercise, you will create a blueprint definition based on CAF Migration Landing Zone, explore the capabilities it provides and assign it at the subscription level to get started with Azure. Also, you will update the blueprint to match the DMZ Network architecture of Tailwind Traders.
 
-## Exercise 3: Enhance
+## Exercise 3: Manage and update your infrastructure
 
 In this exercise, you will implement additional configurations to the Azure Landing Zone accelerator an Azure policy for governance enhancements over deployable regions. You will also enhance your security posture by deploying azure Sentinel.
