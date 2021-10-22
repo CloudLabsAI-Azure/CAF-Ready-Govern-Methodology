@@ -8,13 +8,13 @@ The Cloud Adoption Framework brings together cloud adoption best practices from 
 
 In this workshop, you will learn how to deploy different landing zones to host the workloads that you plan to build in or migrate to the cloud for different scenarios. You will be using the Azure Landing Zone Accelerator an Azure portal-based deployment that will provide a full implementation of the conceptual architecture, along with opinionated configurations for key components such as management groups and policies. You will also experience existing blueprint samples CAF Migration Landing Zone to deploy the basic foundation for migrating low-risk assets, CAF Foundation zone to deploy the minimum tools needed to begin developing a governance strategy. Also, you will see how to use Azure server management services for managing servers at scale.
 
-Consider an analogy of a trip along a freeway. There might be multiple *on-ramps* you can use to join the freeway, but the *destination* is the same.
+Consider an analogy of a journey to a destination. A traveller may be at any *position* on that journey, but the *destination* is the same.
 
-![Diagram of Azure landing zone journey on-ramps.](images/alz-journey.png)
+![Diagram of Azure landing zone journey.](images/alz-journey.png)
 
-These on-ramps represent where organizations are today in their cloud adoption plans and the specific guidance needed to continue to develop the cloud environment.
+These *positions* represent where organizations are today in their cloud adoption plans and the specific guidance needed to continue to develop the cloud environment.
 
-| On-ramp | Description | Further guidance |
+| Position | Description | Further guidance |
 |--|--|--|
 | **Start** | For organizations who are at the beginning of their cloud adoption journey (also referred to as *greenfield*) who are looking to implement a new cloud environment, based on best practices and proven architectural patterns. <br> Start with the Azure landing zone conceptual architecture to understand the recommended end state. <br> Next, explore each of the design areas to understand the key themes that comprise the considerations and decisions needed in order to design and implement the landing zone that best fits your requirements | [What is an Azure landing zone](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/) <br> [Azure landing zone design areas](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-areas) |
 | **Align** | For organizations who have an existing environment that needs modification to align to the Azure landing zone target architecture and best practices (also referred to as *brownfield*). <br> Use the transition from brownfield guidance in order to understand the decision points and technical approach to refactoring environments to align with the guidance in the Ready methodology | [Refactor a landing zone](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/refactor) |
