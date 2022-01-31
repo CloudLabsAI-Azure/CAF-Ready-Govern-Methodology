@@ -1,0 +1,427 @@
+# **Lab 02: AzGovViz- Azure Governance Visualizer - Setup**
+
+
+## **Exercise 1: AzGovViz from Console**
+
+### **Task 1: Execute as Service Principal**
+
+A Service Principal by default has no read permissions on Users, Groups and Service Principals, therefore we need to grant additional permissions in AAD
+
+1. We need to Grant API permissions for the Service Principal´s Application, in Azure portal search for Active Directory *(1)* and click on **Azure Active Directory** from the search results *(2)*.
+
+   ![](images/lab2img1.png)
+
+2. Click on **App registrations (1)** under the Manage section on the left and select the **eslzp (2)** we created in lab 1.
+
+   ![](images/lab2img2.png)
+
+3. Now click on **API permissions** under **Manage** and then click on **+ Add a permission**.
+
+   ![](images/lab2img3.png)
+
+4. A side window **Request API permissions** will open, here click on **Microsoft Graph**
+
+   ![](images/lab2img4.png)
+
+5. Under Microsoft Graph select **Application permissions** *(1)*, and expand the group of permissions and select the following set of permissions.
+
+   - Application / Application.Read.All *(2)*
+   - Group / Group.Read.All *(3)*
+   - User / User.Read.All *(4)*
+   - Once all the mentioned permissions are selected, click on *Add permissions** button at the bottom.
+
+   ![](images/lab2img5.png)
+
+6. Now, click on **Grant Admin Consent** *(1)* and on the *Grant admin consent confirmation* click on **Yes** *(2)*
+
+   ![](images/lab2img17.png)
+
+
+
+### **Task 2: Clone the AzGovViz repository**
+
+1. In your JumpVm click on start and open **Powershell Core**.
+
+**Note:** Make sure the icon of powershell matches the icon in the screenshot below.
+
+   ![](images/lab2img21.png)
+
+
+2. Run the following commands in powershell to clone the GitHub repository.
+
+``` 
+Set-Location "C:\Program Files\Git"
+```
+
+```
+git clone "https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting.git"
+```
+
+
+
+### **Task 3: Run AzGovViz Console**
+
+1. Run the following command in powershell to connect to your Azure account.
+>**Note:** Replace <TenantID> with your Tenant Id which can be found in your Azure active directory.
+
+```
+Connect-AzAccount -TenantId <TenantId> -UseDeviceAuthentication
+```
+
+2. Now the powershell will ask you to go to ```https://microsoft.com/devicelogin``` *(1)* and enter the code mentioned in powershell *(2)*.
+
+   ![](images/lab2img7.png)
+
+3. In a new browser tab, visit ```https://microsoft.com/devicelogin``` and enter the code mentioned in your poewrshell *(1)* then click on **Next** *(2)*.
+
+   ![](images/lab2img18.png)
+
+4. Now on **Pick an account** window select your Azure Account.
+
+   ![](images/lab2img19.png)
+
+5. On the **Are you trying to sign in to Microsoft Azure PowerShell?** prompt, click on **Continue**.
+
+    ![](images/lab2img20.png)
+
+6. Once the above steps are done, return to powershell and run the command below.
+
+```
+C:\'Program Files'\Git\Azure-MG-Sub-Governance-Reporting\pwsh\AzGovVizParallel.ps1 -ManagementGroupId eslz
+```
+
+7. Once the script is completed successfully and you get the below output, you can continue with the next exercise.
+
+   ![](images/lab2img22.png)
+
+
+## **Exercise 2: AzGovViz in Azure DevOps**
+
+### **Task 1: Create AzDO Project**
+
+1. In a new browser tab, go to ```https://dev.azure.com``` and provide the following details then click on **Continue** *(3)*.
+
+   - Project name: Replace the existing project name with **AzDO** *(1)*
+    - Enter the captcha code *(2)*
+
+ ![](images/lab2img8.png)
+
+### **Task 2: Import AzGovViz Github repository**
+
+1. In Azure Devops, Click on **Repos** and select **Files**, and click on **Import**.
+
+ ![](images/lab2img13.png)
+
+2. In  *Import a Git repository* window, enter the following URL ```https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting.git``` *(1)* and click on **Import** *(2)*.
+
+ ![](images/lab2img14.png)
+
+3. Once Import is successful, you will receive the following message on the screen.
+
+ ![](images/lab2img15.png)
+
+
+### **Task 3: Create AzDO Service Connection**
+
+For the pipeline to authenticate and connect to Azure we need to create an AzDO Service Connection which basically is a Service Principal (Application)  
+
+
+1. Click on **Project settings** *(1)* (located on the bottom left).
+
+2. Under 'Pipelines' click on **Service connections** *(2)*.
+
+3. Click on **Create service connection** *(3)*.
+
+ ![](images/lab2img16.png)
+
+4. Select the *New service connection* type **Azure Resource Manager** *(1)* and click *Next* *(2)*.
+
+ ![](images/lab2img10.png)
+
+4. For the authentication method select **Service principal (automatic)** *(1)* and click **Next** *(2)*.
+
+ ![](images/lab2img11.png)
+
+5. For the 'Scope level' select ```Management Group``` *(1)*, in the Management Group dropdown, select the target Management Group ```eszl``` *(2)*, in the 'Details' section apply a Service Connection name ```AzGovViz_SC``` *(3)*  and click on **Save** *(4)*.
+
+ ![](images/lab2img12.png)
+
+
+7. Now the Service Connection has been created.
+
+### **Task 4: Grant permissions in Azure**
+
+1. On the 'Service Connections' page click on **AzGovViz_SC** service principle.
+
+ ![](images/lab2img23.png)
+
+2. Under 'AzGovViz_SC' click on **Manage Service Principal**.
+
+ ![](images/lab2img24.png)
+
+3. Now you will be redirected to the Service principle page on Azure Portal, copy the **Display name** of the service principle by clicking on the copy icon and save it in notepad for later use.
+
+  ![](images/lab2img25.png)
+
+4. In Azure Portal search for **Management Groups** *(1)* and click on it from search results *(2)*.
+
+ ![](images/lab2img26.png)
+
+5. On the 'Management groups' page click on **eslz**.
+
+ ![](images/lab2img24.png)
+
+6. Under 'eslz Management group' page, click on **Access control (IAM)** *(1)* then click on **+ Add** *(2)* and select **Add role assignment** *(3)* from the drop down.
+
+ ![](images/lab2img28.png)
+
+7. Now in 'Add role assignment' page, click on **Reader** *(1)* and then click on **Next** *(2)*.
+
+ ![](images/lab2img29.png)
+
+8. Now click on **+ Select members** *(1)*, then enter the display name of service principal we copied in step 3 *(2)* then click on the search result to select it and click on **Select** *(3)* button. Then Click on **Next** *(4)* and then **Review + assign**.
+
+ ![](images/lab2img30.png)
+
+
+### **Task 5: Grant permissions in AAD**
+
+In this task, we need to grant API permissions for the Service Principal´s Application that we created earlier.
+
+1. We need to Grant API permissions for the Service Principal´s Application, in Azure portal search for Active Directory *(1)* and click on **Azure Active Directory** from the search results *(2)*.
+
+   ![](images/lab2img1.png)
+
+2. Click on **App registrations** under Manage *(1)* and select the **odluser-<Suffix>-AzDo-eslz** application *(2)*. Where Suffix is a unique numerical code.
+
+   ![](images/lab2img31.png)
+
+3. Now click on **API permissions** under 'Manage' and then click on **+ Add a permission**.
+
+   ![](images/lab2img32.png)
+
+4. A side window **Request API permissions** will open, here click on **Microsoft Graph**
+
+   ![](images/lab2img4.png)
+
+5. Under Microsoft Graph select **Application permissions** *(1)*, and expand the group of permissions and select the following set of permissions.
+
+   - Application / Application.Read.All *(2)*
+   - Group / Group.Read.All *(3)*
+   - User / User.Read.All *(4)*
+   - Once all the mentioned permissions are selected, click on *Add permissions** button at the bottom.
+
+   ![](images/lab2img5.png)
+
+
+6. Now, click on **Grant Admin Consent** *(1)* and on the *Grant admin consent confirmation* click on **Yes** *(2)*
+
+   ![](images/lab2img17.png)
+
+
+### **Task 6: Grant permissions on AzGovViz AzDO repository**
+
+When the AzDO pipeline executes the AzGovViz script the outputs should be pushed back to the AzGovViz AzDO repository, in order to do this we need to grant the AzDO Project´s Build Service account with 'Contribute' permissions on the repository.
+    
+1. Return to Azure Devops and in AzDO click on **Project settings** *(1)*  (located on the bottom left), under '_Repos_' open the **Repositories** *(2)* page, then click on the **AzDO** Repository *(3)*.
+
+   ![](images/lab2img33.png)
+
+
+2. Select the  **Security** tab *(1)*, click on the **AzDo Build Service** account *(2)*, and then on the right side search for the Build Service account grant it with **Contribute** permissions by selecting **Allow** *(3)* (no 'Save' button is available. The configuration will be saved automatically).
+
+    ![](images/lab2img34.png)
+
+
+### **Task 7: Edit AzDO YAML file**
+
+1. Now on the left hand side of the screen in Azure DevOps, click on '__Repos__' *(1)*, Expand the folder __.pipeline__ *(1)* click on __AzGovViz.yml__ *(2)* and click __Edit__ *(3)*.
+
+    ![](images/lab2img35.png)
+
+2. Under the variables section (line number 60).
+    - Replace ```<YourServiceConnection>``` *(1)* with **AzGovViz_SC** .
+    - Replace ```<YourManagementGroupId>``` *(2)* with **eslz**.
+
+3. Click '__Commit__' *(3)*.
+
+    ![](images/lab2img36.png)
+
+4. Under 'Commit' page click on **Commit** button.
+
+
+### **Task 8: Create AzDO Pipeline**
+
+1. In Azure DevOps, click on '__Pipelines__' *(1)* and select **Create Pipeline** *(2)*.
+
+    ![](images/lab2img37.png)
+
+2. Under "Where is your code?' select '__Azure Repos Git__'.
+
+    ![](images/lab2img38.png)
+
+3. Under 'Select a repository', select **AzDo** repository.
+
+    ![](images/lab2img39.png)
+
+
+4. Under 'Configure your pipeline' click on '__Existing Azure Pipelines YAML file__'.
+
+    ![](images/lab2img40.png)
+
+5. Under 'Select an existing YAML file', select *Path* as ```/pipeline/AzGovViz.yml``` *(1)* (the YAML file we edited earlier), and click on **Continue** *(2)*.
+
+    ![](images/lab2img41.png)
+
+
+6. Now under 'Review your pipeline YAML' Click on the drop down next to *Run* *(1)* and click on __Save__ *(2)*.
+
+    ![](images/lab2img42.png)
+
+
+### **Task 9: Run the AzDO Pipeline**
+
+1. Once the steps in the previous task are executed, you will be redirected to **AzDo** pipeline.
+
+2. Click '__Run pipeline__'.
+
+    ![](images/lab2img43.png)
+
+3. Under the 'Run Pipeline' parameters page, click on **Run**.
+
+    ![](images/lab2img44.png)
+
+4. If you are prompted with a warning saying *This Pipeline needs permission to access a resource before this run can continue*, click on **View**
+
+   ![](images/lab62img45.png)
+
+5. Under *Waiting for review** page, click on **Permit**.
+
+   ![](images/lab62img46.png)
+
+6. Now, under *Permit access* prompt, click on **Permit**.
+
+   ![](images/lab62img48.png)
+
+7. Now the pipeline should start running, it will take aroung 3 minutes for the pipeline run to complete.
+
+8. Once Pipeline run is successful, the pipeline should look like the image below.
+
+   ![](images/lab62img49.png)
+
+
+
+### **Task 10: Create AzDO Wiki (WikiAsCode)**
+
+Once the pipeline has been executed successfully we can set up our Wiki (WikiAsCode)
+
+1. Click on **Overview**.
+
+    ![](images/lab2img52.png)
+
+2. Click on **Wiki** *(1)* and select **Publish code as wiki** *(2)*.
+
+    ![](images/lab2img53.png)
+
+3. Under **Publish code as wiki** enter the following details and click on **Publish** *(5)*.
+
+    - Repository: **AzDo** *(1)*.
+    - Folder: Click on the ```...``` ellipsis *(2)*, and select **/wiki** folder *(3)*.
+    - Wiki name: **AzGovViz wiki** *(4)*.
+
+    ![](images/lab2img54.png)
+
+4. Once the Wiki is published, it will look like following.
+
+    ![](images/lab2img55.png)
+
+
+# **Exercise 3: AzGovViz GitHub Codespaces**
+
+Note: Codespaces is available for organizations using GitHub Team or GitHub Enterprise Cloud. We have enabled a GitHub account for this task and its details can be found under **Environment Details** tab.
+
+
+1. From the Environment detials tab copy the GitHub account details and log into ```https://github.com/login```.
+
+>**Note:** If you are prompted to enter a verification code as shown in the screenshot below, Follow the steps below or skip to step 2.
+>
+>![](images/lab2img56.png)
+>
+>Use the github credentials to log into outlook by visiting following URL ```https://outlook.office.com/mail/``` and use the code received to Log in to GitHub.
+>
+>![](images/lab2img57.png)
+>
+>
+
+2. After logging in to GitHub, visit the following URL.
+
+```
+https://github.com/JulianHayward/Azure-MG-Sub-Governance-Reporting
+```
+
+3. Fork the repository by clicking on the **Fork** button on the top right corner.
+
+    ![](images/lab2img50.png)
+
+4. On the prompt, select the GitHub **github-cloudlabsuser** organisation to fork the repository.
+
+    ![](images/lab2img51.png)
+
+
+5. In the forked github repository click on **Code** *(1)*, then select the **Codespaces** tab *(2)* and then select **New Codespace**.
+
+    ![](images/lab2img58.png)
+
+6. Now GitHub will start building the codespace.
+
+    ![](images/lab2img59.png)
+
+7. Once Codespace is published it will look like the image below.
+
+    ![](images/lab2img60.png)
+
+8. Run the following command in powershell to connect to your Azure account.
+>**Note:** Replace <TenantID> with your Tenant Id which can be found in your Azure active directory in Azure Portal.
+
+```
+Connect-AzAccount -TenantId <TenantId> -UseDeviceAuthentication
+```
+
+9. Now the powershell will ask you to go to ```https://microsoft.com/devicelogin``` *(1)* and enter the code mentioned in powershell *(2)*.
+
+   ![](images/lab2img7.png)
+
+10. In a new browser tab, visit ```https://microsoft.com/devicelogin``` and enter the code mentioned in your poewrshell *(1)* then click on **Next** *(2)*.
+
+   ![](images/lab2img61.png)
+
+11. Now on **Pick an account** window select **+ Use another account** and eneter your Azure Credentials mentioned below:
+
+   ![](images/lab62img19.png)
+
+  - Username: **<inject key="AzureAdUserEmail" />**
+  - Password: **<inject key="AzureAdUserPassword" />**
+
+
+12. On the **Are you trying to sign in to Microsoft Azure PowerShell?** promt, click on **Continue**.
+
+    ![](images/lab2img20.png)
+
+13. Once above steps are done, return to codespace and run the command below.
+
+```
+./AzGovVizParallel.ps1
+```
+14. You will be prompted *Please enter a selection*, here identify the serial number of ```eslz``` management group and enter that next to **Please enter a selection**, and hit Enter.
+
+   ![](images/lab62img63.png)
+15. Once the scriptis executed, you terminal should look like following.
+
+   ![](images/lab62img64.png)
+
+16. Now Navigate to **/pwsh/AzGovViz_v6_major_20220116_2_20220131_134431_eslz.html** file to see the management group tree.
+
+   ![](images/lab62img65.png)
+
+
+   
