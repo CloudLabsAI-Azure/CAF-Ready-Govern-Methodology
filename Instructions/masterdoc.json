@@ -4,11 +4,11 @@
     "Language": "English",
     "Files": [
       {
-        "RawFilePath":  "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/dev/Instructions/00.md",
+        "RawFilePath":  "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/stage/Instructions/00.md",
         "Order": 1
       },
       {
-        "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/stage/Instructions/README.md",
+        "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/dev/Instructions/README.md",
         "Order": 2
       },
       {
