@@ -20,14 +20,25 @@ These *positions* represent where organizations are today in their cloud adoptio
 | **Align** | For organizations who have an existing environment that needs modification to align to the Azure landing zone target architecture and best practices (also referred to as *brownfield*). <br> Use the transition from brownfield guidance in order to understand the decision points and technical approach to refactoring environments to align with the guidance in the Ready methodology | [Refactor a landing zone](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/refactor) |
 | **Enhance** | For environments that are already in line with best practices but the organization is looking to add additional controls or features. <br> Explore the articles that explain the considerations as part of enhancing the key ongoing processes for cloud environments, such as management, governance, and security. | [Enhance guidance for management](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-operations) <br> [Enhance guidance for governance](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-governance) <br> [Enhance guidance for security](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/considerations/landing-zone-security) |
 
-## Exercise 1: Implement Azure landing zone accelerator
+## Lab 1 - Exercise 1: Implement Azure landing zone accelerator
 
 In this exercise, start with the Azure landing zone conceptual architecture to understand the recommended end state. Next, explore each landing zone design areas to understand the key themes that comprise the considerations and decisions needed and deploy the ready-made deployment experience available which we call the Azure landing zone accelerator.
 
-## Exercise 2: Start small and expand a migration landing zone
+## Lab 1 - Exercise 2: Start small and expand a migration landing zone
 
 For this scenario, you have minimal requirements and will iterate into the conceptual architecture over time. In this exercise, you will create a blueprint definition based on CAF Migration Landing Zone, explore the capabilities it provides and assign it at the subscription level to get started with Azure. Also, you will update the blueprint to match the DMZ Network architecture of Tailwind Traders.
 
-## Exercise 3: Enhance your landing zone
+## Lab 1 - Exercise 3: Enhance your landing zone
 
 In this exercise, you will implement additional configurations to the Azure Landing Zone accelerator an Azure policy for governance enhancements over deployable regions. You will also enhance your security posture by deploying azure Sentinel.
+
+## Lab 2: AzGovViz - Azure Governance Visualizer
+
+Do you want to get granular insights on your technical Azure Governance implementation? - document it in CSV, HTML, Markdown and JSON?
+AzGovViz is a PowerShell based script that iterates your Azure Tenant´s Management Group hierarchy down to Subscription level. It captures most relevant Azure governance capabilities such as Azure Policy, RBAC and Blueprints and a lot more. From the collected data AzGovViz provides visibility on your HierarchyMap, creates a TenantSummary, creates DefinitionInsights and builds granular ScopeInsights on Management Groups and Subscriptions. The technical requirements as well as the required permissions are minimal.
+
+You can run the script either for your Tenant Root Group or any other Management Group.
+
+## Lab 3: CCO Azure Governance Dashboard
+
+The CCO Azure Governance Dashboard is aligned with the Microsoft Cloud Adoption Framework governance principles and will allow getting quick insights around Management Groups, Subscriptions, Blueprints, Polices, Naming Standards, Tagging, and Regulatory Standards compliance. The information captured on this Power BI Dashboard can help Cloud Teams, Operations Teams, or Business Decision Makers to have a snapshot of the current Azure configuration in just a few minutes
