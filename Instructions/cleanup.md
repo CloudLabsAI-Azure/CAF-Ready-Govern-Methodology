@@ -2,7 +2,7 @@
 
 ## Exercise 1: Delete the Azure DevOps organization
 
-In this exercise, you will delete Azure DevOps organization created in support of the lab.
+In this exercise, you will delete the Azure DevOps organization created in support of the lab.
 
 1. In your JumpVM, open a new browser tab and navigate to **https://dev.azure.com/odluser<inject key="DeploymentID" enableCopy="false" />**.
 
@@ -12,7 +12,7 @@ In this exercise, you will delete Azure DevOps organization created in support o
 
    ![img](./images/img2.png)
 
-3. On the Organization settings page select **Overview(1)**, scroll down to end of the page and under Delete organization select **Delete(2)**.
+3. On the Organization settings page select **Overview(1)**, scroll down to the end of the page and under Delete organization select **Delete(2)**.
 
    ![img](./images/img3.png)
 
