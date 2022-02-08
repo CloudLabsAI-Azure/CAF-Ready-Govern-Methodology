@@ -12,7 +12,7 @@ In this exercise, you will delete Azure DevOps organization created in support o
 
    ![img](./images/img2.png)
 
-3. On Organization settings page Select **Overview(1)**, scroll down to end of the page and under Delete organization select **Delete(2)**.
+3. On the Organization settings page select **Overview(1)**, scroll down to end of the page and under Delete organization select **Delete(2)**.
 
    ![img](./images/img3.png)
 
