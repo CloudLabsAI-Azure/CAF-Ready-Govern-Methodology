@@ -8,7 +8,7 @@
 
 ### 18 April 2022
 
-   - Updated Instructions
+   - Updated Instructions : In 01.md file the name of the workflow has been updated from **Azure landing zone accelerator Deployment** to **Enterprise-Scale Deployment**
 
 ------------
 
