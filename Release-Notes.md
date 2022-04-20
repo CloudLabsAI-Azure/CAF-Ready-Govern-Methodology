@@ -6,4 +6,10 @@
   - UI updates
 -----------
 
+### 18 April 2022
+
+   - Updated Instructions
+
+------------
+
 - No updates in August 2021
