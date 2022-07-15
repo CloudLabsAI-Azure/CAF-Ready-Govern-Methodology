@@ -1,5 +1,10 @@
 # Release Notes
 
+### 04 May 2022
+ 
+ - Instructions update : 
+       - In **01.md** file instruction is added in Task-1/step-3 to **Leave the Customer Usage Selection** Options as default.
+
 ### 08 February 2022
 
   - Instructions update :
