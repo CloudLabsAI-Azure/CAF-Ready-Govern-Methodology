@@ -1,5 +1,10 @@
 # Release Notes
 
+### 28 October 2022
+
+- Major Update in the Lab Guide
+  - In **01.md** file, **exercise 1** has been updated. The Tasks to deploy the Azure Landing zone has been removed as it has been added as part of lab's automation. A new task has been added as Exercise 1 Task 1 to integrate AzOps with Azure Landing Zone.
+
 ### 04 May 2022
  
  - Instructions update : 
