@@ -16,11 +16,11 @@
         "Order": 3
       },
       {
-        "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/stage/Instructions/02.md",
+        "RawFilePath": "https://raw.githubusercontent.com/shivashant25/AVW-Cloud-Adoption-Framework/stage/Instructions/02.md",
         "Order": 4
       },
       {
-        "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/AVW-Cloud-Adoption-Framework/stage/Instructions/03.md",
+        "RawFilePath": "https://raw.githubusercontent.com/shivashant25/AVW-Cloud-Adoption-Framework/stage/Instructions/03.md",
         "Order": 5
       }              
     ]
