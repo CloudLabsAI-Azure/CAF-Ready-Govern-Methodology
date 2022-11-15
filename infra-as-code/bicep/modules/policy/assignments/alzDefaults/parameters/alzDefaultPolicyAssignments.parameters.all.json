@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "parTopLevelManagementGroupPrefix": {
+            "value": "eslz"
+        },
+        "parLogAnalyticsWorkSpaceAndAutomationAccountLocation": {
+            "value": "centralus"
+        },
+        "parLogAnalyticsWorkspaceResourceId": {
+            "value": "logid"
+        },
+        "parLogAnalyticsWorkspaceLogRetentionInDays": {
+            "value": "30"
+        },
+        "parAutomationAccountName": {
+            "value": "eslz-automation-account"
+        },
+        "parMsDefenderForCloudEmailSecurityContact": {
+            "value": "security_contact@replace_me.com"
+        },
+        "parDdosProtectionPlanId": {
+            "value": "ddosid"
+        },
+        "parTelemetryOptOut": {
+            "value": false
+        }
+    }
+}
