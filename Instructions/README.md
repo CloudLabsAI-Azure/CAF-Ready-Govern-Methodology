@@ -1,8 +1,8 @@
-# Cloud Adoption Framework
+# CAF Ready/Govern Methodology
 
-The Microsoft Cloud Adoption Framework for Azure is proven guidance that's designed to help you create and implement the business and technology strategies necessary for your organization to succeed in the cloud. It provides best practices, documentation, and tools that cloud architects, IT professionals, and business decision-makers need in order to successfully achieve short-term and long-term objectives.
+The Microsoft CAF Ready/Govern Methodology for Azure is proven guidance that's designed to help you create and implement the business and technology strategies necessary for your organization to succeed in the cloud. It provides best practices, documentation, and tools that cloud architects, IT professionals, and business decision-makers need in order to successfully achieve short-term and long-term objectives.
 
-The Cloud Adoption Framework brings together cloud adoption best practices from Microsoft employees, partners, and customers. It provides a set of tools, guidance, and narratives that help shape technology, business, and people strategies for driving desired business outcomes during your cloud adoption effort. By using the Microsoft Cloud Adoption Framework for Azure best practices, organizations can better align their business and technical strategies to ensure success.
+The CAF Ready/Govern Methodology brings together cloud adoption best practices from Microsoft employees, partners, and customers. It provides a set of tools, guidance, and narratives that help shape technology, business, and people strategies for driving desired business outcomes during your cloud adoption effort. By using the Microsoft CAF Ready/Govern Methodology for Azure best practices, organizations can better align their business and technical strategies to ensure success.
 
 ## Lab Context 	
 
