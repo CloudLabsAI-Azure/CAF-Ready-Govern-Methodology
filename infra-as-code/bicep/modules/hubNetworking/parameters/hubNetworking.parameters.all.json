@@ -36,15 +36,6 @@
     "parPublicIpSku": {
       "value": "Standard"
     },
-    "parAzBastionEnabled": {
-      "value": true
-    },
-    "parAzBastionName": {
-      "value": "eslz-bastion"
-    },
-    "parAzBastionSku": {
-      "value": "Standard"
-    },
     "parAzBastionNsgName": {
       "value": "nsg-AzureBastionSubnet"
     },
