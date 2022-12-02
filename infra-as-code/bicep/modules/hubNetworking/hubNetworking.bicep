@@ -36,14 +36,6 @@ param parDnsServerIps array = []
 ])
 param parPublicIpSku string = 'Standard'
 
-@description('Switch to enable/disable Azure Bastion deployment. Default: true')
-param parAzBastionEnabled bool = true
-
-@description('Name Associated with Bastion Service:  Default: {parCompanyPrefix}-bastion')
-param parAzBastionName string = '${parCompanyPrefix}-bastion'
-
-@description('Azure Bastion SKU or Tier to deploy.  Currently two options exist Basic and Standard. Default: Standard')
-param parAzBastionSku string = 'Standard'
 
 @description('NSG Name for Azure Bastion Subnet NSG. Default: nsg-AzureBastionSubnet')
 param parAzBastionNsgName string = 'nsg-AzureBastionSubnet'
@@ -254,27 +246,6 @@ resource resHubVnet 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   }
 }
 
-module modBastionPublicIp '../publicIp/publicIp.bicep' = if (parAzBastionEnabled) {
-  name: 'deploy-Bastion-Public-IP'
-  params: {
-    parLocation: parLocation
-    parPublicIpName: '${parAzBastionName}-PublicIp'
-    parPublicIpSku: {
-      name: parPublicIpSku
-    }
-    parPublicIpProperties: {
-      publicIpAddressVersion: 'IPv4'
-      publicIpAllocationMethod: 'Static'
-    }
-    parTags: parTags
-    parTelemetryOptOut: parTelemetryOptOut
-  }
-}
-
-resource resBastionSubnetRef 'Microsoft.Network/virtualNetworks/subnets@2021-08-01' existing = {
-  parent: resHubVnet
-  name: 'AzureBastionSubnet'
-}
 
 resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
   name: parAzBastionNsgName
@@ -402,33 +373,6 @@ resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
   }
 }
 
-// AzureBastionSubnet is required to deploy Bastion service. This subnet must exist in the parsubnets array if you enable Bastion Service.
-// There is a minimum subnet requirement of /27 prefix.  
-// If you are deploying standard this needs to be larger. https://docs.microsoft.com/en-us/azure/bastion/configuration-settings#subnet
-resource resBastion 'Microsoft.Network/bastionHosts@2021-08-01' = if (parAzBastionEnabled) {
-  location: parLocation
-  name: parAzBastionName
-  tags: parTags
-  sku: {
-    name: parAzBastionSku
-  }
-  properties: {
-    dnsName: uniqueString(resourceGroup().id)
-    ipConfigurations: [
-      {
-        name: 'IpConf'
-        properties: {
-          subnet: {
-            id: resBastionSubnetRef.id
-          }
-          publicIPAddress: {
-            id: parAzBastionEnabled ? modBastionPublicIp.outputs.outPublicIpId : ''
-          }
-        }
-      }
-    ]
-  }
-}
 
 resource resGatewaySubnetRef 'Microsoft.Network/virtualNetworks/subnets@2021-08-01' existing = {
   parent: resHubVnet
